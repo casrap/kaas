@@ -1,22 +1,25 @@
-input.onGesture(Gesture.LogoDown, function () {
-    basic.showString("Vrije val")
-})
+let getallen = false
+let stappen = 0
 input.onButtonPressed(Button.A, function () {
-    basic.showString("klik op knop b")
-})
-input.onGesture(Gesture.Shake, function () {
-    basic.showString("draai mij naar beneden")
+    getallen = true
 })
 input.onButtonPressed(Button.AB, function () {
-    basic.showString("schud!")
-})
-input.onGesture(Gesture.FreeFall, function () {
-    basic.showString("loop met mij")
+    basic.showNumber(stappen)
 })
 input.onButtonPressed(Button.B, function () {
-    basic.showString("klik op a en b")
+    getallen = false
 })
-basic.showString("klik op a")
 basic.forever(function () {
-	
+    if (getallen == true) {
+        if (input.acceleration(Dimension.X) > 1500) {
+            stappen += 1
+        }
+    }
+})
+basic.forever(function () {
+    if (getallen == false) {
+        if (input.acceleration(Dimension.X) > 1500) {
+            stappen += 1
+        }
+    }
 })
